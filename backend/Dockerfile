@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.14-slim
 
 # Install system dependencies for OpenCV
 RUN apt-get update && apt-get install -y \
@@ -9,6 +9,16 @@ RUN apt-get update && apt-get install -y \
     libxrender1 \
     libgomp1 \
     libgthread-2.0-0 \
+    # Build tools for packages like numpy that may need compilation on newer Python
+    build-essential \
+    gcc \
+    g++ \
+    gfortran \
+    pkg-config \
+    meson \
+    ninja-build \
+    libopenblas-dev \
+    liblapack-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
